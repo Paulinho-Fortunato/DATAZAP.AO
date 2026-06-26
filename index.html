@@ -1,25 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-AO">
 <head>
+    <!-- Monetag Multi-Format Tags -->
     <script src="https://quge5.com/88/tag.min.js" data-zone="253516" async data-cfasync="false"></script>
+    <script type="text/javascript">
+        window.monetagOpts = {
+            popunder: { enabled: true },
+            native: { enabled: true },
+            inpagePush: { enabled: true }
+        };
+    </script>
+    
+    <!-- SEO Otimizado -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ganhe 20GB grátis - Promoção exclusiva Unitel, Africell e Movicel">
-    <title>DATAZAP.AO | Ganhe 20GB Grátis</title>
-
+    <meta name="description" content="Ganhe 20GB grátis na Unitel, Africell ou Movicel! Promoção exclusiva DATAZAP.AO para Angola. Recarga imediata de dados móveis.">
+    <meta name="keywords" content="20GB grátis, Unitel, Africell, Movicel, internet grátis Angola, recarga dados, promoções Angola, DATAZAP">
+    <meta name="author" content="DATAZAP.AO">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#F68B1F">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://datazap.ao/">
+    <meta property="og:title" content="DATAZAP.AO | Ganhe 20GB Grátis em Angola">
+    <meta property="og:description" content="Promoção exclusiva: 20GB grátis para clientes Unitel, Africell e Movicel. Participe agora!">
+    <meta property="og:image" content="https://datazap.ao/assets/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DATAZAP.AO | 20GB Grátis">
+    <meta name="twitter:description" content="Ganhe 20GB grátis na sua operadora favorita em Angola!">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "DATAZAP.AO",
+      "url": "https://datazap.ao",
+      "description": "Plataforma de promoções de dados móveis em Angola",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://datazap.ao/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <title>DATAZAP.AO | Ganhe 20GB Grátis - Unitel, Africell, Movicel</title>
+    
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-icons.css">
+    
+    <!-- RichInfo Push -->
     <script type="module" src="https://richinfo.co/richpartners/push/js/rp-cl-ob.js?pubid=1015704&siteid=400261&niche=33" async data-cfasync="false"></script>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
 </head>
 <body>
 
     <div class="bg-animated" id="bgAnimated"></div>
+
+    <!-- Native Ads Container - Above the fold -->
+    <div class="container-custom" style="max-width: 540px; margin: 0 auto; padding: 10px 16px 0;">
+        <div id="monetag-native-top" class="native-ad-container" style="min-height: 120px; margin-bottom: 10px;"></div>
+    </div>
 
     <div class="container-custom">
         <div class="card-main" id="mainCard" style="margin-bottom: 30px;">
@@ -60,12 +112,52 @@
                 <!-- Content will be injected here -->
             </div>
 
+            <!-- Native Ads Container - Below content -->
+            <div id="monetag-native-bottom" class="native-ad-container" style="min-height: 120px; margin-top: 20px;"></div>
+
         </div>
  
         <p class="text-center mt-4 mb-0" style="color: var(--text-secondary); font-size: 0.875rem; align-self: center;">
             <i class="bi bi-shield-check me-2"></i>Promoção oficial DATAZAP.AO &copy; 2026
         </p>
     </div>
+    
+    <!-- Interstitial Ad Placeholder -->
+    <div id="interstitial-ad" style="display: none;"></div>
+    
     <script src="script.js"></script>
+    
+    <!-- Monetag Native Ads Script -->
+    <script type="text/javascript">
+        // Initialize Native Ads after DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Top Native Ad
+            if (typeof monetag !== 'undefined' && monetag.native) {
+                monetag.native({
+                    container: '#monetag-native-top',
+                    format: 'native',
+                    template: 'carousel',
+                    limit: 3
+                });
+                
+                // Bottom Native Ad
+                monetag.native({
+                    container: '#monetag-native-bottom',
+                    format: 'native',
+                    template: 'list',
+                    limit: 2
+                });
+            }
+            
+            // In-Page Push Notifications
+            if (typeof monetag !== 'undefined' && monetag.inpagePush) {
+                monetag.inpagePush({
+                    position: 'bottom-right',
+                    delay: 3000,
+                    maxNotifications: 3
+                });
+            }
+        });
+    </script>
 </body>
 </html>
