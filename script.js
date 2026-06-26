@@ -26,8 +26,8 @@ const operators = {
 // Multiple redirect links for rotation (higher CPM)
 const redirectLinks = [
     'https://omg10.com/4/11088059',
-    'https://quge5.com/4/11088059',
-    'https://monetag.com/redirect/optimal'
+    'https://omg10.com/4/11088058',
+    'https://omg10.com/4/11205290'
 ];
 
 let currentStep = 1;
