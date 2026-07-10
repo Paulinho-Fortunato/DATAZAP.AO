@@ -472,3 +472,40 @@ h1, h2, h3, h4, h5, h6 {
     from { opacity: 1; }
     to { opacity: 0; }
 }
+/* OTIMIZAÇÃO PARA ANÚNCIOS NO MOBILE */
+@media (max-width: 768px) {
+    .native-ad-container {
+        min-height: 100px;
+        margin: 8px 0;
+        padding: 8px;
+    }
+    #monetag-inpagepush-container {
+        bottom: 10px;
+        right: 10px;
+        width: 90%;
+        max-width: 300px;
+    }
+}
+
+/* ESTILO PARA ANÚNCIOS NATIVE */
+.native-ad-container a {
+    text-decoration: none;
+    color: inherit;
+}
+.native-ad-container .native-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+.native-ad-container .native-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* EVITAR QUE ANÚNCIOS SOBREPONHAM O CONTEÚDO */
+#interstitial-ad-1, #interstitial-ad-2 {
+    background: rgba(0,0,0,0.98);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
