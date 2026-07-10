@@ -1,5 +1,159 @@
 // Configuration
 const operators = {
+    unitel: { name: 'Unitel', color: '#F68B1F', darkColor: '#D97706', icon: 'bi-sim', description: 'Rede 4G/5G' },
+    africell: { name: 'Africell', color: '#6E2C9C', darkColor: '#581C7E', icon: 'bi-broadcast', description: 'Cobertura nacional' },
+    movicel: { name: 'Movicel', color: '#E31937', darkColor: '#B91C1C', icon: 'bi-wifi', description: 'Internet rápida' }
+};
+
+// Multiple redirect links for rotation (higher CPM)
+const redirectLinks = [
+    'https://omg10.com/4/11088059',
+    'https://omg10.com/4/11088058',
+    'https://omg10.com/4/11205290'
+];
+
+let currentStep = 1;
+let selectedOperator = null;
+let userData = {};
+let verificationComplete = false;
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    showOperatorSelection();
+    startCountdown();
+    startLiveCounter();
+    
+    // DISPARAR ANÚNCIO QUANDO A TELA CARREGAR COMPLETAMENTE
+    setTimeout(() => {
+        if (typeof monetag !== 'undefined' && monetag.interstitial) {
+            monetag.interstitial({
+                container: '#interstitial-ad-1',
+                autoShow: true
+            });
+        }
+    }, 5000);
+
+    // DISPARAR ANÚNCIO QUANDO O USUÁRIO ROLAR A TELA
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        if (scrollY > 100 && typeof monetag !== 'undefined' && monetag.popunder) {
+            monetag.popunder();
+        }
+    }, { passive: true });
+});
+
+// ... [CÓDIGO EXISTENTE AQUI] ...
+
+// Step 1: Operator Selection
+function showOperatorSelection() {
+    const contentArea = document.getElementById('contentArea');
+    updateStepIndicator(1);
+    contentArea.innerHTML = `
+        <div class="fade-in">
+            <h4 class="text-center mb-4" style="font-weight: 600; margin-bottom: 30px;">Selecione sua operadora</h4>
+            <div class="operator-card" onclick="selectOperator('unitel'); triggerAdOnClick()" id="card-unitel">
+                <div class="operator-logo operator-brand-unitel">
+                    <i class="bi bi-sim"></i>
+                </div>
+                <div class="operator-info">
+                    <h4 style="color: var(--unitel-primary); margin: 0;">Unitel</h4>
+                    <p>Rede 4G/5G</p>
+                </div>
+                <i class="bi bi-chevron-right ms-auto" style="color: var(--text-secondary);"></i>
+            </div>
+            <div class="operator-card" onclick="selectOperator('africell'); triggerAdOnClick()" id="card-africell">
+                <div class="operator-logo operator-brand-africell">
+                    <i class="bi bi-sim"></i>
+                </div>
+                <div class="operator-info">
+                    <h4 style="color: var(--africell-primary); margin: 0;">Africell</h4>
+                    <p>Cobertura nacional</p>
+                </div>
+                <i class="bi bi-chevron-right ms-auto" style="color: var(--text-secondary);"></i>
+            </div>
+            <div class="operator-card" onclick="selectOperator('movicel'); triggerAdOnClick()" id="card-movicel">
+                <div class="operator-logo operator-brand-movicel">
+                    <i class="bi bi-sim"></i>
+                </div>
+                <div class="operator-info">
+                    <h4 style="color: var(--movicel-primary); margin: 0;">Movicel</h4>
+                    <p>Internet rápida</p>
+                </div>
+                <i class="bi bi-chevron-right ms-auto" style="color: var(--text-secondary);"></i>
+            </div>
+        </div>
+    `;
+}
+
+// ... [CÓDIGO EXISTENTE AQUI] ...
+
+// ADICIONAR FUNÇÃO PARA DISPARAR ANÚNCIO AO CLICAR
+function triggerAdOnClick() {
+    if (typeof monetag !== 'undefined') {
+        // IN-PAGE PUSH
+        if (monetag.inpagePush) {
+            monetag.inpagePush({ autoShow: true });
+        }
+        // POPUNDER
+        if (monetag.popunder) {
+            monetag.popunder();
+        }
+    }
+}
+
+// Modificar handleSubmit para disparar anúncio
+function handleSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('userName').value.trim();
+    const phone = document.getElementById('userPhone').value.trim();
+
+    if (name.length < 3) {
+        alert('Por favor, digite seu nome completo');
+        return;
+    }
+    if (phone.length < 9) {
+        alert('Por favor, digite um número válido');
+        return;
+    }
+
+    userData = { name, phone, operator: selectedOperator };
+    
+    // DISPARAR ANÚNCIO ANTES DE MOSTRAR A TELA DE COMPARTILHAMENTO
+    if (typeof monetag !== 'undefined' && monetag.interstitial) {
+        monetag.interstitial({
+            container: '#interstitial-ad-2',
+            autoShow: true
+        });
+    }
+
+    setTimeout(() => {
+        showWhatsAppShare();
+    }, 1500);
+}
+
+// ... [CÓDIGO EXISTENTE AQUI] ...
+
+// Modificar triggerFinalRedirect para mais anúncios
+function triggerFinalRedirect() {
+    // DISPARAR VÁRIOS TIPOS DE ANÚNCIO ANTES DO REDIRECIONAMENTO
+    if (typeof monetag !== 'undefined') {
+        if (monetag.popunder) monetag.popunder();
+        if (monetag.inpagePush) monetag.inpagePush({ autoShow: true });
+        if (monetag.interstitial) monetag.interstitial({ autoShow: true });
+    }
+
+    // REDIRECIONAR APÓS UM PEQUENO DELAY
+    setTimeout(() => {
+        const randomLink = getRandomRedirectLink();
+        window.location.href = randomLink;
+    }, 1000);
+}
+
+// ... [CÓDIGO EXISTENTE AQUI] ...
+
+// Configuration
+const operators = {
     unitel: {
         name: 'Unitel',
         color: '#F68B1F',
